@@ -1,0 +1,26 @@
+records:
+  output:
+  - sermon_name
+  - sermon_date
+  - run_time
+  - speaker
+  - organization
+  - categories
+  - topics
+  - scripture_references
+  - language
+crawler:
+  base_url: https://sermonaudio.com/
+  components:
+    list_records:
+      path: search.asp
+      params:
+        sortby: date
+        AudioOnly: 'false'
+        keyword: '{search_term}'
+      types:
+        by_speaker:
+          params:
+            search_term: '{speaker_name}'
+            SpeakerOnly: 'true'
+      pagination_param: currpage
