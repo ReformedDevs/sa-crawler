@@ -9,6 +9,8 @@ import yaml
 
 
 def load_config():
+    """Return a mapping object of configuration items from config.yaml."""
+
     path = os.path.join(
         os.path.abspath(os.path.dirname(__file__)),
         'config.yaml'
@@ -20,6 +22,23 @@ def load_config():
 
 
 def build_url(config, component, sub_component, page=None, **kwargs):
+    """Use config and inputs to determins url and params for crawling
+
+    Arguments:
+    config (dict): the configuration information
+    component (string): the component to crawl
+    sub_component (string): the sub_component/component type to crawl
+
+    Keyword arguments:
+    page (int): the page number of the data to crawl, if paginated
+    **kwargs: additional inputs to substitute values into config values
+
+    Returns:
+    dict:
+        url: the url to use for crawling
+        params: the query string parameters to use for crawling
+    """
+
     params = {}
     config = config.get('crawler')
     if not config:
